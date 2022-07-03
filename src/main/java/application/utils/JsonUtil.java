@@ -1,6 +1,7 @@
-package application.Utilities;
+package application.utils;
 
 
+import application.entities.EventEntity;
 import org.json.simple.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 
-public class JsonUtilities {
+public class JsonUtil {
 
     public String parseUrl(URL url) {
         if (url == null) {

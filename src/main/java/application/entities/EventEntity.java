@@ -1,12 +1,17 @@
 package application.entities;
 
+import jdk.jfr.Event;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 
+
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
+
+import static java.lang.Integer.parseInt;
 
 
 @Table(name="Events")
@@ -16,6 +21,12 @@ public class EventEntity {
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column
+    private int nextId = -1;
+
+    @Column
+    private int prevId = -1;
 
     @Column
     private String title;
@@ -38,9 +49,6 @@ public class EventEntity {
     @Column
     private java.sql.Time endTime;
 
-    @Column
-    boolean isLastEvent;
-
     public EventEntity() {
     }
 
@@ -54,12 +62,50 @@ public class EventEntity {
             setEndDate(Date.valueOf((String) json.get("endDate")));
             setStartTime(Time.valueOf((String) json.get("startTime")));
             setEndTime(Time.valueOf((String) json.get("endTime")));
-            setIsLastEvent((Boolean) json.get("isLastEvent"));
+            if (json.containsKey("prevId")) {
+                json.put("prevId", parseInt(json.get("prevId").toString()));
+                setPrevId((int) json.get("prevId"));
+            }
+            if (json.containsKey("nextId")) {
+                json.put("nextId", parseInt(json.get("nextId").toString()));
+                setNextId((int) json.get("nextId"));
+            }
+            if (json.containsKey("id")) {
+                json.put("id", parseInt(json.get("id").toString()));
+                setId((int) json.get("id"));
+            }
         } catch(ParseException ex) {
             ex.printStackTrace();
         }
     }
 
+    public EventEntity clone() {
+        EventEntity event = new EventEntity();
+        event.setNextId(nextId);
+        event.setPrevId(prevId);
+        event.setId(id);
+        event.setText(text);
+        event.setTitle(title);
+        event.setPlace(place);
+        event.setStartDate((Date) startDate.clone());
+        event.setEndDate((Date) endDate.clone());
+        event.setStartTime((Time) startTime.clone());
+        event.setEndTime((Time) endTime.clone());
+        return event;
+    }
+    public String toString() {
+        String res = "Event with id " + id + "\nTitle: " + title + "\nPlace: " + place + "\nText: " + text +
+                "\nStart date: " + startDate + "\nEnd date: " + endDate + "\nStart time: " + startTime + "\nEnd time: " +
+                endTime;
+        if (prevId != -1) {
+            res += "\nPrev id:" + prevId;
+        }
+        if (nextId != -1) {
+            res += "\nNext id:" + nextId;
+        }
+        return res;
+
+    }
     public int getId() {
         return id;
     }
@@ -86,14 +132,6 @@ public class EventEntity {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public boolean getIsLastEvent() {
-        return isLastEvent;
-    }
-
-    public void setIsLastEvent(boolean lastEvent) {
-        isLastEvent = lastEvent;
     }
 
     public void setPlace(String place) {
@@ -130,5 +168,21 @@ public class EventEntity {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public int getNextId() {
+        return nextId;
+    }
+
+    public void setNextId(int nextId) {
+        this.nextId = nextId;
+    }
+
+    public int getPrevId() {
+        return prevId;
+    }
+
+    public void setPrevId(int prevId) {
+        this.prevId = prevId;
     }
 }
