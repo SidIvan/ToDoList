@@ -4,22 +4,43 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.*;
-import java.net.http.HttpClient;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @SpringBootApplication
 public class ToDoListApplication {
     public static void main(String[] args) throws IOException {
         SpringApplication a = new SpringApplication(ToDoListApplication.class);
         a.run(args);
-        HttpClient client = HttpClient.newHttpClient();
 //        File testFile = new File("src/test/java/creationDailyEventTest");
 //        File testFile = new File("src/test/java/creationIntervalyEventTest");
 //        File testFile = new File("src/test/java/deleteByIdTest");
+//        File testFile = new File("src/test/java/creationSingleBirthdayTest  ");
+//        File testFile = new File("src/test/java/creationRegularBirthdayTest");
 //        File testFile = new File("src/test/java/deleteRowByIdTest");
-        File testFile = new File("src/test/java/putTest");
+//        File testFile = new File("src/test/java/putTest");
+//        File testFile = new File("src/test/java/deleteByTitleTest");
+//        File testFile = new File("src/test/java/putNewbornNameTest");
+        File testFile = new File("src/test/java/getByNewbornNameTest");
+//        File testFile = new File("src/test/java/getBirthdayByIdTest");
         Reader fileReader = new FileReader(testFile);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
-        SimpleInterface test = new SimpleInterface(client);
+        SimpleInterface test = new SimpleInterface();
         test.Test(testFile);
+
+
+
     }
+
+
+    static void func() {
+        System.out.println("F");
+    }
+
+    static void func(int a) {
+        System.out.println(a);
+    }
+
 }
+

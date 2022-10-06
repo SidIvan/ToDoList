@@ -63,16 +63,13 @@ public class EventEntity {
             setStartTime(Time.valueOf((String) json.get("startTime")));
             setEndTime(Time.valueOf((String) json.get("endTime")));
             if (json.containsKey("prevId")) {
-                json.put("prevId", parseInt(json.get("prevId").toString()));
-                setPrevId((int) json.get("prevId"));
+                setPrevId(parseInt(json.get("prevId").toString()));
             }
             if (json.containsKey("nextId")) {
-                json.put("nextId", parseInt(json.get("nextId").toString()));
-                setNextId((int) json.get("nextId"));
+                setNextId(parseInt(json.get("nextId").toString()));
             }
             if (json.containsKey("id")) {
-                json.put("id", parseInt(json.get("id").toString()));
-                setId((int) json.get("id"));
+                setId(parseInt(json.get("id").toString()));
             }
         } catch(ParseException ex) {
             ex.printStackTrace();

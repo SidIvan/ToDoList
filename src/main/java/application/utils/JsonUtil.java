@@ -1,14 +1,21 @@
 package application.utils;
 
 
+import application.entities.BirthdayEntity;
 import application.entities.EventEntity;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class JsonUtil {
 
@@ -39,6 +46,23 @@ public class JsonUtil {
     }
 
 
+    public static List<BirthdayEntity> parseBirthdays(String birthdaysData) {
+        JSONParser jsonParser = new JSONParser();
+        try {
+            JSONArray jsonArray = (JSONArray) jsonParser.parse(birthdaysData);
+            List<BirthdayEntity> birthdayEntities = new ArrayList<>();
+            for (Object json : jsonArray) {
+                birthdayEntities.add(new BirthdayEntity(((JSONObject) json).toString()));
+            }
+            return birthdayEntities;
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        List<BirthdayEntity> birthdayEntities = new ArrayList<>();
+        return birthdayEntities;
+
+
+    }
     public static String buildEventJson(HashMap<String, String> eventData) {
         JSONObject json = new JSONObject();
         json.putAll(eventData);

@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -16,6 +15,8 @@ import java.util.List;
 @Repository
 public interface EventRepository extends JpaRepository<EventEntity, Integer> {
 
+    List<EventEntity> findById(int id);
+
     List<EventEntity> findByTitle(String title);
 
     @Query(value = "SELECT * FROM events WHERE start_date<=:date AND end_date >=:date order by start_time",
@@ -23,9 +24,11 @@ public interface EventRepository extends JpaRepository<EventEntity, Integer> {
     List<EventEntity> findByDate(@Param("date") Date date);
 
 
+    @Modifying
+    @Transactional
     @Query(value = "DELETE FROM events WHERE title = :title",
            nativeQuery = true)
-    void deleteByTitle(@Param("title") String title);
+    int deleteByTitle(@Param("title") String title);
 
     @Modifying
     @Transactional
