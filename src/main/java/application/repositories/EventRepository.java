@@ -23,7 +23,6 @@ public interface EventRepository extends JpaRepository<EventEntity, Integer> {
            nativeQuery = true)
     List<EventEntity> findByDate(@Param("date") Date date);
 
-
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM events WHERE title = :title",
@@ -84,5 +83,3 @@ public interface EventRepository extends JpaRepository<EventEntity, Integer> {
             nativeQuery = true)
     int updateEndTime(@Param("id") int id, @Param("endTime") Time endTime);
 }
-
-

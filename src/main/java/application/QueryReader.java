@@ -83,6 +83,7 @@ public class QueryReader {
                 break;
             }
             if (fileString.equals("all")) {
+                jsonBody.put("type", "all");
                 return jsonBody;
             }
             String[] substrs = fileString.split(": ");
