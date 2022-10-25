@@ -13,12 +13,11 @@ public class ToDoListApplication {
     public static void main(String[] args) throws IOException {
         SpringApplication a = new SpringApplication(ToDoListApplication.class);
         a.run(args);
-//        File testFile = new File("src/test/java/creationDailyEventTest");
+        File testFile = new File("src/test/java/creationDailyEventTest");
 //        File testFile = new File("src/test/java/creationIntervalyEventTest");
 //        File testFile = new File("src/test/java/deleteByIdTest");
 //        File testFile = new File("src/test/java/creationSingleBirthdayTest");
-
-        File testFile = new File("src/test/java/deleteAllTest");
+//        File testFile = new File("src/test/java/deleteAllTest");
 //        File testFile = new File("src/test/java/creationRegularBirthdayTest");
 //        File testFile = new File("src/test/java/deleteRowByIdTest");
 //        File testFile = new File("src/test/java/putTest");
@@ -30,19 +29,6 @@ public class ToDoListApplication {
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         SimpleInterface test = new SimpleInterface();
         test.Test(testFile);
-
-
-
     }
-
-
-    static void func() {
-        System.out.println("F");
-    }
-
-    static void func(int a) {
-        System.out.println(a);
-    }
-
 }
 
