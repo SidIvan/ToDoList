@@ -17,7 +17,6 @@ import java.util.Optional;
 
 import static java.lang.Integer.parseInt;
 
-
 @RestController
 public class ToDoListController {
     @Autowired
@@ -92,7 +91,6 @@ public class ToDoListController {
         title = title.replaceAll("_", " ");
         List<EventEntity> deletingQueue = eventRepository.findByTitle(title);
         for (EventEntity event : deletingQueue) {
-//            System.out.println(event.getId());
             birthdayRepository.deleteById(event.getId());
         }
         eventRepository.deleteByTitle(title);

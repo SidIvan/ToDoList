@@ -8,6 +8,8 @@ import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "roles")
@@ -18,10 +20,13 @@ public class RoleEntity {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
     @Column
-    String title;
+    private String title;
+
+    @ManyToMany(mappedBy = "roles")
+    private Set<AccountEntity> accounts = new HashSet<>();
 
     public RoleEntity() {}
 

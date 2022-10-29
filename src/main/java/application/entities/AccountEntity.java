@@ -7,8 +7,12 @@ import lombok.Setter;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
+import org.springframework.data.repository.cdi.Eager;
 
+import javax.management.relation.Role;
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Getter
@@ -20,13 +24,21 @@ public class AccountEntity {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
     @Column
-    String login;
+    private String login;
 
     @Column
-    String password;
+    private String password;
+
+    @ManyToMany(fetch=FetchType.LAZY)
+    @JoinTable(
+            name = "applied_roles",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "account_id")
+    )
+    private Set<RoleEntity> roles = new HashSet<>();
 
     public AccountEntity() {}
 
