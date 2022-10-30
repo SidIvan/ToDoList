@@ -15,6 +15,7 @@ import java.util.List;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.stream;
 
+@Deprecated
 public class QuerySender {
     private final static JsonUtil jsonUtil = new JsonUtil();
     private final static QueryReader queryReader = new QueryReader();

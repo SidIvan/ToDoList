@@ -14,6 +14,7 @@ import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
+@Deprecated
 public class BirthdayURLSender {
     private final static Utils connection = URLSender.connection;
     private final HttpClient client = URLSender.client;

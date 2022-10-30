@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.HashMap;
 
+@Deprecated
 public class QueryReader {
     public HashMap<String, String> readCreateQuery(BufferedReader bufferedReader) {
         String fileString = "";

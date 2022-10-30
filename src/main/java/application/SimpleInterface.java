@@ -17,6 +17,7 @@ import java.util.List;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.stream;
 
+@Deprecated
 public class SimpleInterface {
     private static QueryReader queryReader = new QueryReader();
     private static QuerySender querySender = new QuerySender();
