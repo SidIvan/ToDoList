@@ -7,9 +7,7 @@ import lombok.Setter;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
-import org.springframework.data.repository.cdi.Eager;
 
-import javax.management.relation.Role;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,6 +30,16 @@ public class AccountEntity {
     @Column
     private String password;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="access_token_id",
+                referencedColumnName="id")
+    private AccessTokenEntity accessToken;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="refresh_token_id",
+            referencedColumnName="id")
+    private RefreshTokenEntity refreshToken;
+
     @ManyToMany(fetch=FetchType.LAZY)
     @JoinTable(
             name = "applied_roles",
@@ -51,8 +59,8 @@ public class AccountEntity {
             if(!json.containsKey("password")) {
                 throw new AccountCreationException(1);
             }
-            login = (String) json.get("login");
-            password = (String) json.get("password");
+            login = json.get("login").toString();
+            password = json.get("password").toString();
         } catch (ParseException ex) {
             ex.printStackTrace();
         }

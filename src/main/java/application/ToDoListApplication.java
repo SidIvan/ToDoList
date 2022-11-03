@@ -4,13 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Random;
 
 @SpringBootApplication
 public class ToDoListApplication {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         SpringApplication a = new SpringApplication(ToDoListApplication.class);
         a.run(args);
 //        File testFile = new File("src/test/java/creationDailyEventTest");

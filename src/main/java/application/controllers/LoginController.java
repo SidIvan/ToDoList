@@ -18,4 +18,10 @@ public class LoginController {
     public String login(@RequestBody String jsonString) {
         return loginService.login(jsonString);
     }
+
+    @PostMapping("/access")
+    public String access(@RequestBody String jsonString) {return loginService.access(jsonString);}
+
+    @PostMapping("/refresh")
+    public String refresh(@RequestBody String jsonString) {return loginService.refresh(jsonString);}
 }
